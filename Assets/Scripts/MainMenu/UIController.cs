@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    AudioSource audio;
+
+    private bool soundPlaying = false;
+    private void Start()
+    {
+        audio = GetComponent<AudioSource>();
+        audio.Play(1000);
+        soundPlaying = true;
+    }
     private void Update()
     {
         
@@ -12,5 +21,18 @@ public class UIController : MonoBehaviour
     public void AppExit()
     {
         Application.Quit();
+    }
+
+    public void ToggleAudio()
+    {
+        if (soundPlaying)
+        {
+            audio.Stop();
+            soundPlaying = false;
+        } else
+        {
+            audio.Play();
+            soundPlaying = true;
+        }
     }
 }
