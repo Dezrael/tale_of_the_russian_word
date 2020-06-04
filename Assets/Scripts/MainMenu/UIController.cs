@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     AudioSource audio;
+    public Image soundImage;
+    public Sprite offSound;
+    public Sprite onSound;
 
     private bool soundPlaying = false;
     private void Start()
@@ -29,10 +32,12 @@ public class UIController : MonoBehaviour
         {
             audio.Stop();
             soundPlaying = false;
+            soundImage.sprite = offSound;
         } else
         {
             audio.Play();
             soundPlaying = true;
+            soundImage.sprite = onSound;
         }
     }
 }
