@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    AudioSource audio;
+    new AudioSource audio;
     public Image soundImage;
     public Sprite offSound;
     public Sprite onSound;
@@ -15,6 +16,7 @@ public class UIController : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         audio.Play(1000);
+        DontDestroyOnLoad(audio);
         soundPlaying = true;
     }
     private void Update()
@@ -24,6 +26,21 @@ public class UIController : MonoBehaviour
     public void AppExit()
     {
         Application.Quit();
+    }
+
+    public void ChapterSelect()
+    {
+        SceneManager.LoadScene("ChapterSelect", LoadSceneMode.Single);
+    }
+
+    public void ProgressPage()
+    {
+        SceneManager.LoadScene("Progress", LoadSceneMode.Single);
+    }
+
+    public void RulesPage()
+    {
+        SceneManager.LoadScene("Rules", LoadSceneMode.Single);
     }
 
     public void ToggleAudio()
