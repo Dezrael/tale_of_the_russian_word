@@ -40,6 +40,12 @@ public class UIController : MonoBehaviour
         ActivateLevel("ChapterSelect");
     }
 
+    public void ThemeSelect()
+    {
+        Debug.Log("safasfas");
+        ActivateLevel("ThemeSelect");
+    }
+
     public void ProgressPage()
     {
         
