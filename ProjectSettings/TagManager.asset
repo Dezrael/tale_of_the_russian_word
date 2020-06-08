@@ -4,18 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - MainMenu
-  - GameMethodsMenu
-  - ChapterSelectMenu
-  - ThemeSelect
-  - LevelSelect
-  - Progress
-  - Stat
-  - Achievement
-  - Rules
-  - Theory
-  - Practice
-  - Options
+  - Level
   layers:
   - Default
   - TransparentFX

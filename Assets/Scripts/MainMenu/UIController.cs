@@ -16,13 +16,10 @@ public class UIController : MonoBehaviour
     private bool soundPlaying = false;
     private void Start()
     {
-        levels = new Dictionary<string, GameObject>();
+        InitLevels();
         audio = GetComponent<AudioSource>();
-        audio.PlayDelayed(1000f);
+        audio.PlayDelayed(1f);
         soundPlaying = true;
-        levels.Add("mainMenu", GameObject.FindGameObjectWithTag("MainMenu").gameObject);
-        levels.Add("gameMethods", GameObject.FindGameObjectWithTag("GameMethodsMenu").gameObject);
-        levels["gameMethods"].SetActive(false);
     }
     private void Update()
     {
@@ -33,10 +30,14 @@ public class UIController : MonoBehaviour
         Application.Quit();
     }
 
+    public void GameMethodSelect()
+    {
+        ActivateLevel("GameMethods");
+    }
+
     public void ChapterSelect()
     {
-        levels["mainMenu"].SetActive(false);
-        levels["gameMethods"].SetActive(true);
+        ActivateLevel("ChapterSelect");
     }
 
     public void ProgressPage()
@@ -62,5 +63,35 @@ public class UIController : MonoBehaviour
             soundPlaying = true;
             soundImage.sprite = onSound;
         }
+    }
+
+    private void InitLevels()
+    {
+        levels = new Dictionary<string, GameObject>();
+        FillLevels();
+        foreach (string key in levels.Keys)
+        {
+            levels[key].SetActive(false);
+        }
+        ActivateLevel("MainMenu");
+    }
+
+    private void FillLevels()
+    {
+        GameObject[] levelObjects = GameObject.FindGameObjectsWithTag("Level");
+        foreach (GameObject level in levelObjects)
+        {
+            levels.Add(level.name, level);
+        }
+    }
+    
+    private void ActivateLevel(string levelName)
+    {
+        foreach (string key in levels.Keys)
+        {
+            levels[key].SetActive(false);
+        }
+
+        levels[levelName].SetActive(true);
     }
 }
