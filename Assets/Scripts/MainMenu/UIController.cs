@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class UIController : MonoBehaviour
 {
@@ -10,18 +11,22 @@ public class UIController : MonoBehaviour
     public Image soundImage;
     public Sprite offSound;
     public Sprite onSound;
+    private Dictionary<string, GameObject> levels;
 
     private bool soundPlaying = false;
     private void Start()
     {
+        levels = new Dictionary<string, GameObject>();
         audio = GetComponent<AudioSource>();
-        audio.Play(1000);
-        DontDestroyOnLoad(audio);
+        audio.PlayDelayed(1000f);
         soundPlaying = true;
+        levels.Add("mainMenu", GameObject.FindGameObjectWithTag("MainMenu").gameObject);
+        levels.Add("gameMethods", GameObject.FindGameObjectWithTag("GameMethodsMenu").gameObject);
+        levels["gameMethods"].SetActive(false);
     }
     private void Update()
     {
-        
+       
     }
     public void AppExit()
     {
@@ -30,17 +35,18 @@ public class UIController : MonoBehaviour
 
     public void ChapterSelect()
     {
-        SceneManager.LoadScene("ChapterSelect", LoadSceneMode.Single);
+        levels["mainMenu"].SetActive(false);
+        levels["gameMethods"].SetActive(true);
     }
 
     public void ProgressPage()
     {
-        SceneManager.LoadScene("Progress", LoadSceneMode.Single);
+        
     }
 
     public void RulesPage()
     {
-        SceneManager.LoadScene("Rules", LoadSceneMode.Single);
+        
     }
 
     public void ToggleAudio()
