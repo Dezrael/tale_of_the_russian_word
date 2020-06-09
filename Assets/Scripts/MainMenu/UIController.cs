@@ -42,13 +42,17 @@ public class UIController : MonoBehaviour
 
     public void ThemeSelect()
     {
-        Debug.Log("safasfas");
         ActivateLevel("ThemeSelect");
+    }
+
+    public void LevelSelect()
+    {
+        ActivateLevel("LevelSelect");
     }
 
     public void ProgressPage()
     {
-        
+        ActivateLevel("Progress");
     }
 
     public void RulesPage()
