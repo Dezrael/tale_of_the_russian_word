@@ -13,7 +13,7 @@ public class UIController : MonoBehaviour
     public Sprite onSound;
     private Dictionary<string, GameObject> levels;
 
-    private bool soundPlaying = false;
+    public bool soundPlaying = false;
     private void Start()
     {
         InitLevels();
@@ -21,10 +21,7 @@ public class UIController : MonoBehaviour
         audio.PlayDelayed(1f);
         soundPlaying = true;
     }
-    private void Update()
-    {
-       
-    }
+
     public void AppExit()
     {
         Application.Quit();
@@ -55,9 +52,9 @@ public class UIController : MonoBehaviour
         ActivateLevel("Progress");
     }
 
-    public void RulesPage()
+    public void OptionsPage()
     {
-        
+        ActivateLevel("Options");
     }
 
     public void ToggleAudio()
@@ -73,6 +70,11 @@ public class UIController : MonoBehaviour
             soundPlaying = true;
             soundImage.sprite = onSound;
         }
+    }
+
+    public void ContactDeveloper ()
+    {
+        Application.OpenURL("mailto:nagahiko.yamamoto@gmail.com");
     }
 
     private void InitLevels()
