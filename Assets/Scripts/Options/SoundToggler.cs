@@ -16,15 +16,8 @@ public class SoundToggler : MonoBehaviour
     void Start()
     {
         controllerScript = _UIController.GetComponent<UIController>();
-        if (controllerScript.soundPlaying)
-        {
-            onSoundBtn.SetActive(true);
-            offSoundBtn.SetActive(false);
-        } else
-        {
-            onSoundBtn.SetActive(false);
-            offSoundBtn.SetActive(true);
-        }
+        onSoundBtn.SetActive(controllerScript.soundPlaying);
+        offSoundBtn.SetActive(!controllerScript.soundPlaying);
     }
 
     public void offSound ()

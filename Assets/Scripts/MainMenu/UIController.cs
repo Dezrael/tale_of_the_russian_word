@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
     {
         InitLevels();
         audio = GetComponent<AudioSource>();
-        audio.PlayDelayed(1f);
+        audio.PlayDelayed(2500);
         soundPlaying = true;
     }
 
