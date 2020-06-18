@@ -13,6 +13,10 @@ public class UIController : MonoBehaviour
     public Sprite onSound;
     private Dictionary<string, GameObject> levels;
 
+    private List<string> levelHistory;
+
+    private bool isRules = false;
+
     public bool soundPlaying = false;
     private void Start()
     {
@@ -35,6 +39,7 @@ public class UIController : MonoBehaviour
     public void ChapterSelect()
     {
         ActivateLevel("ChapterSelect");
+        isRules = false;
     }
 
     public void ThemeSelect()
@@ -42,9 +47,22 @@ public class UIController : MonoBehaviour
         ActivateLevel("ThemeSelect");
     }
 
+    public void ChapterSelectRules ()
+    {
+        ActivateLevel("ChapterSelect");
+        isRules = true;
+    }
+
     public void LevelSelect()
     {
-        ActivateLevel("LevelSelect");
+        if (isRules)
+        {
+            ActivateLevel("Rules");
+        }
+        else
+        {
+            ActivateLevel("LevelSelect");
+        }
     }
 
     public void ProgressPage()
@@ -72,6 +90,21 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void backToLevel ()
+    {
+        if (levelHistory.Count > 1)
+        {
+            levelHistory.RemoveAt(levelHistory.Count - 1);
+            string levelName = levelHistory[levelHistory.Count - 1];
+            foreach (string key in levels.Keys)
+            {
+                levels[key].SetActive(false);
+            }
+
+            levels[levelName].SetActive(true);
+        }
+    }
+
     public void ContactDeveloper ()
     {
         Application.OpenURL("mailto:nagahiko.yamamoto@gmail.com");
@@ -79,6 +112,7 @@ public class UIController : MonoBehaviour
 
     private void InitLevels()
     {
+        levelHistory = new List<string>();
         levels = new Dictionary<string, GameObject>();
         FillLevels();
         foreach (string key in levels.Keys)
@@ -99,6 +133,7 @@ public class UIController : MonoBehaviour
     
     private void ActivateLevel(string levelName)
     {
+        levelHistory.Add(levelName);
         foreach (string key in levels.Keys)
         {
             levels[key].SetActive(false);
